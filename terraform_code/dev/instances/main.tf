@@ -103,7 +103,7 @@ resource "aws_eip" "static_eip" {
   )
 }
 
-# AWS ECR Repository
+# AWS ECR Repository Creation
 resource "aws_ecr_repository" "ecr_repository" {
   for_each             = var.ecr_repo
   name                 = "${local.name_prefix}-${each.value}"
