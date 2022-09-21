@@ -52,6 +52,7 @@ jobs:
         run: |
           cd simple-webapp=color/  
           ls -ltra
+          docker network create -d bridge my-bridge-network
           # Docker build
           docker build -t -f blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG .
           # Unit test
