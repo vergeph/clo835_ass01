@@ -54,7 +54,7 @@ jobs:
           echo "Pause for 10 seconds to let container start"
           sleep 10
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
-      - name: App build, test, tag, and push image to Amazon EC
+      - name: Pink App build, test, tag, and push image to Amazon ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
@@ -68,7 +68,7 @@ jobs:
           echo "Pause for 10 seconds to let container start"
           sleep 10
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
-      - name: App build, test, tag, and push image to Amazon EC
+      - name: Lime App build, test, tag, and push image to Amazon ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
@@ -82,7 +82,7 @@ jobs:
           echo "Pause for 10 seconds to let container start"
           sleep 10
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
-      - name: App build, test, tag, and push image to Amazon EC
+      - name: MySQL App build, test, tag, and push image to Amazon ECR
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
@@ -91,7 +91,7 @@ jobs:
           # Docker build
           docker build -t -f mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 8080:8082 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
+          docker run -d -p 3306:3306 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
