@@ -77,7 +77,7 @@ jobs:
           # Docker build
           docker build -t -f lime $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 8080:8083 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
+          docker run -d -p 8080:8083 --name lime $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
@@ -91,7 +91,7 @@ jobs:
           # Docker build
           docker build -t -f mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 3306:3306 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
+          docker run -d -p 3306:3306 --name mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
