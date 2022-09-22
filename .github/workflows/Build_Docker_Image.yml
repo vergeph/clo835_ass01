@@ -46,7 +46,7 @@ jobs:
           cd simple-webapp-color/  
           ls -ltra
           # Docker build
-          docker build -t -f blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG .
+          docker build -f blue -t $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG .
           # Unit test
           docker run -d -p 8080:8081 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
           docker ps 
@@ -60,7 +60,7 @@ jobs:
           cd simple-webapp-color/  
           ls -ltra
           # Docker build
-          docker build -t -f pink $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG .
+          docker build -f pink -t $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG .
           # Unit test
           docker run -d -p 8080:8082 --name pink $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
           docker ps
@@ -74,7 +74,7 @@ jobs:
           cd simple-webapp-color/  
           ls -ltra
           # Docker build
-          docker build -t -f lime $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG .
+          docker build -f lime -t $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG .
           # Unit test
           docker run -d -p 8080:8083 --name lime $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
           docker ps
@@ -88,7 +88,7 @@ jobs:
           cd simple-webapp-color/  
           ls -ltra
           # Docker build
-          docker build -t -f mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
+          docker build -f mysql -t $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
           # Unit test
           docker run -d -p 3306:3306 --name mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG
           docker ps
