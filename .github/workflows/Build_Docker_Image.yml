@@ -49,11 +49,11 @@ jobs:
           # Docker build
           docker build -f blue -t $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 8080:8081 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
+          docker run -d -p 8081:8081 --name blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          curl localhost:8080 -vvv
+          curl localhost:8081 -vvv
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG
       - name: Pink App build, test, tag, and push image to Amazon ECR
         env:
@@ -65,11 +65,11 @@ jobs:
           # Docker build
           docker build -f pink -t $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 8080:8082 --name pink $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
+          docker run -d -p 8082:8082 --name pink $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          curl localhost:8080 -vvv
+          curl localhost:8082 -vvv
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
       - name: Lime App build, test, tag, and push image to Amazon ECR
         env:
@@ -81,11 +81,11 @@ jobs:
           # Docker build
           docker build -f lime -t $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG .
           # Unit test
-          docker run -d -p 8080:8083 --name lime $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
+          docker run -d -p 8083:8083 --name lime $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
           docker ps
           echo "Pause for 10 seconds to let container start"
           sleep 10
-          curl localhost:8080 -vvv
+          curl localhost:8083 -vvv
           docker push $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG
       - name: MySQL App build, test, tag, and push image to Amazon ECR
         env:
