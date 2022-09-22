@@ -43,9 +43,8 @@ jobs:
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          cd simple-webapp=color/  
+          cd simple-webapp-color/  
           ls -ltra
-          docker network create -d bridge my-bridge-network
           # Docker build
           docker build -t -f blue $ECR_REGISTRY/$ECR_REPO_PREFIX-blue:$IMAGE_TAG .
           # Unit test
@@ -58,7 +57,7 @@ jobs:
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          cd simple-webapp=color/  
+          cd simple-webapp-color/  
           ls -ltra
           # Docker build
           docker build -t -f pink $ECR_REGISTRY/$ECR_REPO_PREFIX-pink:$IMAGE_TAG .
@@ -72,7 +71,7 @@ jobs:
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          cd simple-webapp=color/  
+          cd simple-webapp-color/  
           ls -ltra
           # Docker build
           docker build -t -f lime $ECR_REGISTRY/$ECR_REPO_PREFIX-lime:$IMAGE_TAG .
@@ -86,7 +85,7 @@ jobs:
         env:
          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          cd simple-webapp=color/  
+          cd simple-webapp-color/  
           ls -ltra
           # Docker build
           docker build -t -f mysql $ECR_REGISTRY/$ECR_REPO_PREFIX-mysql:$IMAGE_TAG .
