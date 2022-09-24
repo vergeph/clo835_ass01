@@ -108,7 +108,7 @@ resource "aws_eip" "static_eip" {
 resource "aws_ecr_repository" "ecr_repository" {
   for_each             = var.ecr_repo
   name                 = "${local.name_prefix}-${each.value}"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
