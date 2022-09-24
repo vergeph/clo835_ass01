@@ -43,6 +43,7 @@ resource "aws_instance" "my_amazon" {
   key_name                    = aws_key_pair.my_key.key_name
   vpc_security_group_ids      = [aws_security_group.my_sg.id]
   associate_public_ip_address = false
+  iam_instance_profile        = data.aws_iam_instance_profile.lab_profile.name
   user_data  			= file("install_update.sh")
   lifecycle {
     create_before_destroy = true
@@ -107,10 +108,13 @@ resource "aws_eip" "static_eip" {
 resource "aws_ecr_repository" "ecr_repository" {
   for_each             = var.ecr_repo
   name                 = "${local.name_prefix}-${each.value}"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {
     scan_on_push = true
   }
 }
 
+data "aws_iam_instance_profile" "lab_profile" {
+  name = "LabInstanceProfile"
+}

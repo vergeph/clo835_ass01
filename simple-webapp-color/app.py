@@ -13,7 +13,7 @@ color_codes = {
     "lime": "#00FF00",
     "blue": "#2980b9",
     "blue2": "#30336b",
-    "pink": "#be2edd",
+    "pink": "#FFC0CB",
     "darkblue": "#130f40"
 }
 

@@ -18,13 +18,13 @@ variable "env" {
 }
 
 variable "ecr_repo" {
-  default     = ["blue", "pink","lime","mysql"]
+  default     = ["app", "db"]
   type        = set(string)
   description = "Amazon ECR Repository Names"
 }
 
 variable "sg_ports" {
-  default     = ["22","8080","8081","8082", "8083"]
+  default     = ["22","8081","8082", "8083"]
   type        = list(string)
   description = "Ports that should be open on the host machine"
 }
