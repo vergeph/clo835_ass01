@@ -29,3 +29,9 @@ variable "sg_ports" {
   description = "Ports that should be open on the host machine"
 }
 
+
+variable "tg_ports" {
+  default     = ["8080","8081","8082", "8083"]
+  type        = list(string)
+  description = "Ports for TG"
+}
