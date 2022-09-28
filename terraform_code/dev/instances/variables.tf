@@ -31,7 +31,7 @@ variable "sg_ports" {
 
 
 variable "tg_ports" {
-  default     = ["8080","8081","8082", "8083"]
+  default     = ["8081","8082", "8083"]
   type        = list(string)
   description = "Ports for TG"
 }
