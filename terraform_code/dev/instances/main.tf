@@ -126,11 +126,31 @@ vpc_id = data.aws_vpc.default.id
 
 #subnets = data.aws_subnet_ids.public_sn.ids
 
+#ALB for App EC2 Container
+ resource "aws_lb" "alb" {
+  name               = "${local.name_prefix}-${var.env}-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups = [aws_security_group.my_sg.id]
+  subnets = data.aws_subnet_ids.public_sn.ids
+  enable_deletion_protection = false
+}
+
+resource "aws_lb_listener" "alb0" {
+  load_balancer_arn = aws_lb.alb.arn
+  port     = "80"
+  protocol = "HTTP"
+  
+   default_action {
+    target_group_arn = aws_lb_target_group.alb_tg.arn
+    type             = "forward"
+  }
+}
+
 resource "aws_lb_listener" "alb1" {
   load_balancer_arn = aws_lb.alb.arn
   port     = "8081"
   protocol = "HTTP"
-  
   
    default_action {
     target_group_arn = aws_lb_target_group.alb_tg.arn
@@ -143,7 +163,6 @@ resource "aws_lb_listener" "alb2" {
   port     = "8082"
   protocol = "HTTP"
   
-  
    default_action {
     target_group_arn = aws_lb_target_group.alb_tg.arn
     type             = "forward"
@@ -154,7 +173,6 @@ resource "aws_lb_listener" "alb3" {
   load_balancer_arn = aws_lb.alb.arn
   port     = "8083"
   protocol = "HTTP"
-  
   
    default_action {
     target_group_arn = aws_lb_target_group.alb_tg.arn
@@ -169,17 +187,21 @@ resource "aws_lb_listener" "alb3" {
   vpc_id   = data.aws_vpc.default.id
  }
  
- resource "aws_alb_target_group_attachment" "tgattachment" {
-  count            = 3
+resource "aws_alb_target_group_attachment" "tga01" {
   target_group_arn = aws_lb_target_group.alb_tg.arn
   target_id        = aws_instance.my_amazon.id
+  port             = 8081
 }
 
- resource "aws_lb" "alb" {
-  name               = "${local.name_prefix}-${var.env}-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups = [aws_security_group.my_sg.id]
-  subnets = data.aws_subnet_ids.public_sn.ids
-  enable_deletion_protection = false
+resource "aws_alb_target_group_attachment" "tga02" {
+  target_group_arn = aws_lb_target_group.alb_tg.arn
+  target_id        = aws_instance.my_amazon.id
+  port             = 8082
 }
+
+resource "aws_alb_target_group_attachment" "tga03" {
+  target_group_arn = aws_lb_target_group.alb_tg.arn
+  target_id        = aws_instance.my_amazon.id
+  port             = 8083
+}
+
